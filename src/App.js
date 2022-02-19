@@ -18,9 +18,7 @@ function App() {
     zoom: 17,
   });
   const BSheetRef = useRef();
-  const changeSnap = () => {
-    BSheetRef.current.snapTo(({ maxHeight }) => maxHeight / 3);
-  };
+
   const EventMarkerContainer = ({ position }) => {
     const map = useGoogleMap();
 
@@ -100,7 +98,9 @@ function App() {
         mapContainerStyle={containerStyle}
         center={state.center}
         zoom={state.zoom}
-        onDragStart={changeSnap}
+        onDragStart={() =>
+          BSheetRef.current.snapTo(({ maxHeight }) => maxHeight / 3)
+        }
       >
         {data.map((value) => (
           <EventMarkerContainer
