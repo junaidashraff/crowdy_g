@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { BottomSheet } from "react-spring-bottom-sheet";
 import { useWindowHeight } from "@react-hook/window-size";
 import "./App.css";
@@ -18,18 +18,17 @@ const maxSnap = {
 //     snapPoints =
 // }
 
-function BSheet({ userLocationButton }) {
+function BSheet({ userLocationButton, BSheetRef }) {
   const maxHeight = useWindowHeight();
   const maxSnap = getMaxSnap(maxHeight);
-  const sheetRef = React.useRef();
 
   return (
     <BottomSheet
       className="DetailBottomSheet"
       open
-      ref={sheetRef}
+      ref={BSheetRef}
       blocking={false}
-      defaultSnap={({ snapPoints }) => Math.max(...snapPoints)}
+      defaultSnap={({ snapPoints }) => Math.min(...snapPoints)}
       snapPoints={() => [maxSnap, maxSnap / 3]}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>

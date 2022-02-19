@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   GoogleMap,
   LoadScript,
@@ -17,7 +17,10 @@ function App() {
     center: { lat: 37.3842, lng: 127.1224 },
     zoom: 17,
   });
-
+  const BSheetRef = useRef();
+  const changeSnap = () => {
+    BSheetRef.current.snapTo(({ maxHeight }) => maxHeight / 3);
+  };
   const EventMarkerContainer = ({ position }) => {
     const map = useGoogleMap();
 
@@ -26,6 +29,7 @@ function App() {
         position={position}
         onClick={(marker) => {
           map.panTo(marker.latLng);
+          BSheetRef.current.snapTo(({ maxHeight }) => maxHeight);
         }}
       ></Marker>
     );
@@ -81,14 +85,22 @@ function App() {
       alert("새로고침을 통해 위치 사용을 허락해주세요!..");
     }
   };
+  const defaultMapOptions = {
+    fullscreenControl: false,
+    mapTypeControl: false,
+    zoomControl: false,
+    streetViewControl: false,
+    minZoom: 14,
+    maxZoom: 18,
+  };
   return (
     <LoadScript googleMapsApiKey="AIzaSyCSYjuiuUYQ2tYtEE5V26yBzQhc5M6xjPM">
       <GoogleMap
-        options={{ streetViewControl: false, minZoom: 14, maxZoom: 18 }}
+        options={defaultMapOptions}
         mapContainerStyle={containerStyle}
         center={state.center}
         zoom={state.zoom}
-        onDragEnd={console.log("hiii")}
+        onDragStart={changeSnap}
       >
         {data.map((value) => (
           <EventMarkerContainer
@@ -97,7 +109,7 @@ function App() {
             content={value.content}
           />
         ))}
-        <BSheet userLocationButton={userLocationButton} />
+        <BSheet BSheetRef={BSheetRef} userLocationButton={userLocationButton} />
       </GoogleMap>
     </LoadScript>
   );
