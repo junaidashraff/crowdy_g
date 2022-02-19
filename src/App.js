@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  useGoogleMap,
-} from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker, useGoogleMap } from "@react-google-maps/api";
 import BSheet from "./BottomSheet";
 
 const containerStyle = {
@@ -81,6 +76,13 @@ function App() {
       alert("새로고침을 통해 위치 사용을 허락해주세요!..");
     }
   };
+
+  const defaultMapOptions = {
+    fullscreenControl: false,
+    mapTypeControl: false,
+    zoomControl: false,
+  };
+
   return (
     <LoadScript googleMapsApiKey="AIzaSyCSYjuiuUYQ2tYtEE5V26yBzQhc5M6xjPM">
       <GoogleMap
@@ -89,13 +91,10 @@ function App() {
         center={state.center}
         zoom={state.zoom}
         onDragEnd={console.log("hiii")}
+        options={defaultMapOptions}
       >
         {data.map((value) => (
-          <EventMarkerContainer
-            key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
-            position={value.latlng}
-            content={value.content}
-          />
+          <EventMarkerContainer key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`} position={value.latlng} content={value.content} />
         ))}
         <BSheet userLocationButton={userLocationButton} />
       </GoogleMap>
