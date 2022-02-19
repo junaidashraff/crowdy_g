@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Rovna99/crowdy_g/static/css/main.a4459ba3.css",
+    "main.js": "/Rovna99/crowdy_g/static/js/main.fb35f36c.js",
+    "static/js/787.016a6121.chunk.js": "/Rovna99/crowdy_g/static/js/787.016a6121.chunk.js",
+    "index.html": "/Rovna99/crowdy_g/index.html",
+    "main.a4459ba3.css.map": "/Rovna99/crowdy_g/static/css/main.a4459ba3.css.map",
+    "main.fb35f36c.js.map": "/Rovna99/crowdy_g/static/js/main.fb35f36c.js.map",
+    "787.016a6121.chunk.js.map": "/Rovna99/crowdy_g/static/js/787.016a6121.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a4459ba3.css",
+    "static/js/main.fb35f36c.js"
+  ]
+}
